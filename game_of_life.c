@@ -28,16 +28,16 @@ int load_field(Game *game, FILE *src)
         c = fgetc(src);
         if (c == EOF)
             return (1);
-        if (c == '\n')
-            continue;
-        if (c == CHAR_ALIVE)
-            game->field[row][col] = ALIVE;
-        else
-            game->field[row][col] = DEAD;
-        col++;
-        if (col == WIDTH) {
-            col = 0;
-            row++;
+        if (c != '\n') {
+            if (c == CHAR_ALIVE)
+                game->field[row][col] = ALIVE;
+            else
+                game->field[row][col] = DEAD;
+            col++;
+            if (col == WIDTH) {
+                col = 0;
+                row++;
+            }
         }
     }
     game->alive_count = count_alive(game);
